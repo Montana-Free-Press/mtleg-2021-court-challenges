@@ -3,140 +3,51 @@ import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import SEO from '../components/Seo'
+import CaseList from '../components/CaseList'
 import BillTable from '../components/BillTable'
 import InfoPopup from '../components/InfoPopup'
 import Newsletter from '../components/Newsletter'
 import ContactUs from '../components/ContactUs'
 
-import BillStatusOverview from '../components/overview/BillStatuses'
-import BillLookup from '../components/input/BillLookup'
-import LawmakerLookup from '../components/input/LawmakerLookup'
-import DistrictLookup from '../components/input/DistrictLookup'
+// import BillStatusOverview from '../components/overview/BillStatuses'
+// import BillLookup from '../components/input/BillLookup'
+// import LawmakerLookup from '../components/input/LawmakerLookup'
+// import DistrictLookup from '../components/input/DistrictLookup'
 
 import { dateFormatLong } from '../config/utils'
 
-import { summary, mostRecentActionDate, infoPopups } from '../data/summary.json'
-
-const keyBillCategories = [
-  "Major budget bills",
-  "GOP tax bills",
-  "Democratic tax alternatives",
-  "COVID-19 liability",
-  "Emergency power",
-  "Broadband internet access",
-  "Election administration",
-  "Health care policy",
-  "Labor policy",
-  "Justice policy",
-  "Education policy",
-  "Natural resource policy",
-  "Energy policy",
-  "Firearm regulations",
-  "Anti-abortion measures",
-  "Transgender restrictions",
-  "Recreational marijuana implementation",
-]
+// import { summary, mostRecentActionDate, infoPopups } from '../data/summary.json'
 
 const Index = ({ data }) => {
-  const keyBills = data.keyBills.edges.map(d => d.node)
-  const billIndex = data.billIndex.edges.map(d => d.node)
-  const lawmakerIndex = data.lawmakerIndex.edges.map(d => d.node)
+  const cases = data.cases.edges.map(d => d.node)
 
   // const keyBillCategories = Array.from(new Set(keyBills.map(d => d.majorBillCategory)))
   return <div>
     <SEO title="Overview" />
     <Layout>
-      <h2>The session as of {dateFormatLong(new Date(mostRecentActionDate))}</h2>
+      <div>TK Lede-in. Lorem ipsum and more and more and more and more and then a little bit extra.</div>
 
-      <BillStatusOverview summary={summary} mostRecentActionDate={mostRecentActionDate} />
-
-      <InfoPopup info={infoPopups.find(d => d.key === 'bill-process')} />
-
-      <h2 id="key-bill-status">Key bills</h2>
-      <div className="note">Major legislation identified by MTFP reporters. Where ambiguous, official bill titles are annotated with plain language summaries.</div>
-      {
-        keyBillCategories.map(cat => {
-          const billsInCat = keyBills.filter(d => d.majorBillCategory === cat)
-          return <div key={cat}>
-            <h4>{cat}</h4>
-            <BillTable bills={billsInCat} displayLimit={15} suppressCount={true} />
-          </div>
-        })
-      }
-
-
+      <CaseList cases={cases} />
 
       <Newsletter />
-
-      <h3 id="find-bill">Find a bill</h3>
-      <BillLookup bills={billIndex} />
-
-      <h3 id="find-lawmaker">Find a lawmaker</h3>
-      <LawmakerLookup lawmakers={lawmakerIndex} />
-
-      <h3 id="find-district">Find your district</h3>
-      <DistrictLookup lawmakers={lawmakerIndex} />
 
       <ContactUs />
     </Layout>
   </div>
 }
 
+
+
 export const query = graphql`
   query IndexPageQuery {
-      keyBills: allBillsJson (filter: {isMajorBill: {eq: "yes"}}){
-      edges {
-      node {
-          title
-          identifier
-          status {
-            key
-            step
-            label
-            status
-          }
-          label
-          majorBillCategory
-          textUrl
-          fiscalNoteUrl
-          legalNoteUrl
-          vetoMemoUrl
-          numArticles
-          sponsor {
-            name
-            district
-            party
+      cases: allLawsuitsJson {
+        edges {
+          node {
+            title,
+            number
           }
         }
       }
-    }
-    lawmakerIndex: allLawmakersJson {
-      edges {
-        node {
-          key
-          title
-          name
-          phone
-          email
-          district {
-            key
-          }
-          party
-          locale {
-            short
-          }
-        }
-      }
-    }
-    billIndex: allBillsJson {
-      edges {
-        node {
-          key
-          title
-          identifier
-        }
-      }
-    }
   }
   
   

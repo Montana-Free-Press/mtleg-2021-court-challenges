@@ -3,7 +3,8 @@ import PropTypes from "prop-types"
 import { css } from '@emotion/react'
 import { Link } from 'gatsby'
 
-import Nav from './Nav'
+// import Nav from './Nav'
+
 import Footer from './Footer'
 import MTFPLogo from './MTFPLogo'
 
@@ -77,8 +78,8 @@ const navCss = css`
 `
 
 const headerDonateLink = "https://checkout.fundjournalism.org/memberform?org_id=montanafreepress&campaign=7014o000000JNaKAAW"
-const title = 'Capitol Tracker'
-const subtitle = 'Exploring the data on Montana\'s 2021 legislative session'
+const title = 'TKTK Litigaton Tracker '
+const subtitle = 'TKTKTK Tagline'
 
 const Layout = ({ children }) => {
   return (
@@ -86,15 +87,16 @@ const Layout = ({ children }) => {
       <div css={contentStyle}>
         <div css={headerStyle}>
           <h1 css={titleStyle}><Link to="/">{title}</Link></h1>
-          <h2 css={subtitleStyle}>{subtitle}</h2>
+          {/* <h2 css={subtitleStyle}>{subtitle}</h2>
+           */}
           <div css={mtfpBlurbCss}>
             A digital guide by <MTFPLogo />| <a href={headerDonateLink}>Support this work</a>
           </div>
         </div>
 
-        <div css={navCss}>
+        {/* <div css={navCss}>
           <Nav />
-        </div>
+        </div> */}
 
         <div css={updateCss}>
           Last updated {formatTimeLong(new Date(updateTime))}

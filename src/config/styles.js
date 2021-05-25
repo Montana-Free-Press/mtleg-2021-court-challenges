@@ -46,3 +46,15 @@ export const tableStyle = css`
 export const cellCenteredStyle = css`
     text-align: center;
 `
+
+export const mobileOnlyCss = css`
+    @media screen and (min-width: 500px) {
+        display: none;
+    }
+`
+
+export const desktopOnlyCss = css`
+    @media screen and (max-width: 499px) {
+        display: none;
+    }
+`

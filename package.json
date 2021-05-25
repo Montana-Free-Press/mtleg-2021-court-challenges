@@ -43,9 +43,9 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@storybook/addon-actions": "^6.1.9",
-    "@storybook/addon-essentials": "^6.1.9",
+    "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.1.9",
-    "@storybook/react": "^6.1.9",
+    "@storybook/react": "^6.2.9",
     "babel-loader": "^8.2.1",
     "babel-plugin-remove-graphql-queries": "^2.13.0",
     "babel-preset-react-app": "^10.0.0",
