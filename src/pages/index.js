@@ -1,37 +1,56 @@
 import React from "react"
 import { graphql } from 'gatsby'
+import { css } from '@emotion/react'
 
 import Layout from '../components/Layout'
 import SEO from '../components/Seo'
+import Text from '../components/Text'
 import CaseList from '../components/CaseList'
-import BillTable from '../components/BillTable'
-import InfoPopup from '../components/InfoPopup'
+
 import Newsletter from '../components/Newsletter'
-import ContactUs from '../components/ContactUs'
 
-// import BillStatusOverview from '../components/overview/BillStatuses'
-// import BillLookup from '../components/input/BillLookup'
-// import LawmakerLookup from '../components/input/LawmakerLookup'
-// import DistrictLookup from '../components/input/DistrictLookup'
+import {
+  updateTime,
+  siteHed,
+  siteSubhed,
+  seoHed,
+  seoDescription,
+  byline,
+  intro,
+  categories,
+  footer
+} from '../data/summary'
 
-import { dateFormatLong } from '../config/utils'
 
-// import { summary, mostRecentActionDate, infoPopups } from '../data/summary.json'
+const bylineCss = css`
+  font-size: 1.1.em;
+  font-weight: bold;
+`
+
 
 const Index = ({ data }) => {
   const cases = data.cases.edges.map(d => d.node)
 
-  // const keyBillCategories = Array.from(new Set(keyBills.map(d => d.majorBillCategory)))
   return <div>
-    <SEO title="Overview" />
-    <Layout>
-      <div>TK Lede-in. Lorem ipsum and more and more and more and more and then a little bit extra.</div>
+    <SEO title={seoHed} description={seoDescription} />
+    <Layout updateTime={updateTime} siteHed={siteHed} siteSubhed={siteSubhed}>
+      <div css={bylineCss}>{byline}</div>
 
-      <CaseList cases={cases} />
+      <Text paragraphs={intro} />
+
+      {
+        categories.map(cat => {
+          return <CaseList key={cat.key}
+            title={cat.title}
+            description={cat.description}
+            cases={cases.filter(d => d.category === cat.key)}
+          />
+        })
+      }
 
       <Newsletter />
 
-      <ContactUs />
+      <Text paragraphs={footer} />
     </Layout>
   </div>
 }
@@ -43,8 +62,14 @@ export const query = graphql`
       cases: allLawsuitsJson {
         edges {
           node {
-            title,
-            number
+            name, status, number, category, description, bills, court, docket_url,
+            plaintiffs, defendants, judge,
+            filings {
+              name, date, filedBy, description, pdfName
+            }
+            articles {
+              title, date, link, author
+            }
           }
         }
       }

@@ -1,7 +1,5 @@
 // colors
 
-// TODO: Add party colors
-
 export const statusColors = (billStatus) => {
     return {
         live: '#e8dc74',
@@ -41,8 +39,11 @@ export const positionColors = (positionLetter) => {
 }
 
 
+// Donation URls
+export const headerDonateUrl = 'https://checkout.fundjournalism.org/memberform?org_id=montanafreepress&campaign=7014o000000JnFkAAK'
+export const footerDonateUrl = 'https://checkout.fundjournalism.org/memberform?org_id=montanafreepress&campaign=7014o000000JnFpAAK'
+
 // Menus
-// TODO: Automate pulling these from WordPress
 export const footerLogoUrl = 'https://montanafreepress.org/wp-content/uploads/2020/05/website-footer-logo-1.png'
 export const footerMenus = [
     {
@@ -96,7 +97,7 @@ export const footerMenus = [
             },
             {
                 label: 'Donate',
-                url: 'https://checkout.fundjournalism.org/memberform?org_id=montanafreepress&campaign=7014o000000JNZvAAO',
+                url: footerDonateUrl,
             }
         ]
     }

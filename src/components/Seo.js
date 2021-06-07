@@ -28,7 +28,8 @@ function SEO({ description, lang, meta, title, image }) {
 
   const metaDescription = description || site.siteMetadata.description
   const metaImage = image || site.siteMetadata.image
-  const metaTitle = title ? `${title} | ${site.siteMetadata.title}` : site.siteMetadata.title
+  // const metaTitle = title ? `${title} | ${site.siteMetadata.title}` : site.siteMetadata.title
+  const metaTitle = title ? `${title}` : site.siteMetadata.title
 
   return (
     <Helmet
@@ -36,7 +37,7 @@ function SEO({ description, lang, meta, title, image }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      // titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
           name: `description`,
@@ -68,7 +69,7 @@ function SEO({ description, lang, meta, title, image }) {
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:creator`,

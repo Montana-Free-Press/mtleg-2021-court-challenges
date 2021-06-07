@@ -8,7 +8,8 @@ import { Link } from 'gatsby'
 import Footer from './Footer'
 import MTFPLogo from './MTFPLogo'
 
-import { updateTime } from '../data/summary.json'
+import { headerDonateUrl } from '../config/config'
+
 import { formatTimeLong } from '../config/utils'
 
 import "../config/base.css"
@@ -48,12 +49,17 @@ const titleStyle = css`
   }
 `
 const subtitleStyle = css`
-  color: var(--tan5);
+  color: var(--tan4);
   font-size: 1.15em;
+  font-weight: normal;
+  
   text-align: center;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
+  /* margin-left: 5px; */
+  /* margin-right: 5px; */
+  margin: 5px auto;
+
+
+  max-width: 500px;
 `
 const mtfpBlurbCss = css`
   text-align: center;
@@ -77,20 +83,16 @@ const navCss = css`
   z-index: 1000;
 `
 
-const headerDonateLink = "https://checkout.fundjournalism.org/memberform?org_id=montanafreepress&campaign=7014o000000JNaKAAW"
-const title = 'TKTK Litigaton Tracker '
-const subtitle = 'TKTKTK Tagline'
-
-const Layout = ({ children }) => {
+const Layout = ({ children, updateTime, siteHed, siteSubhed }) => {
   return (
     <div css={bodyStyles}>
       <div css={contentStyle}>
         <div css={headerStyle}>
-          <h1 css={titleStyle}><Link to="/">{title}</Link></h1>
-          {/* <h2 css={subtitleStyle}>{subtitle}</h2>
-           */}
+          {/* <h1 css={titleStyle}><Link to="/">{siteHed}</Link></h1> */}
+          <h1 css={titleStyle}>{siteHed}</h1>
+          <h2 css={subtitleStyle}>{siteSubhed}</h2>
           <div css={mtfpBlurbCss}>
-            A digital guide by <MTFPLogo />| <a href={headerDonateLink}>Support this work</a>
+            A digital guide by <MTFPLogo />| <a href={headerDonateUrl}>Support this work</a>
           </div>
         </div>
 
@@ -98,9 +100,9 @@ const Layout = ({ children }) => {
           <Nav />
         </div> */}
 
-        <div css={updateCss}>
+        {updateTime && <div css={updateCss}>
           Last updated {formatTimeLong(new Date(updateTime))}
-        </div>
+        </div>}
         <main>{children}</main>
       </div>
       <Footer />

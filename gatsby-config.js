@@ -6,16 +6,16 @@
 
 module.exports = {
   siteMetadata: {
-    title: `2021 Montana Capitol Tracker`,
-    description: `A digital guide to the lawmakers, bills and votes shaping Montana's future through the 2021 Montana Legislature`,
+    title: `Laws on trial – Montana Capitol lawsuit tracker`,
+    description: `MTFP's digital guide to the 2021 laws that have been challenged in court and where those cases stand.`,
     author: `Eric Dietrich / Montana Free Press`,
-    siteUrl: `https://www.apps.montanafreepress.org/capitol-tracker-2021/`,
-    keywords: ['Montana', 'Legislature', 'House', 'Senate', '2021', 'state budget', 'bills', 'resolutions', 'elections', 'politics'],
+    siteUrl: `https://www.apps.montanafreepress.org/montana-legislature-lawsuit-tracker/`,
+    keywords: ['Montana', 'Legislature', 'House', 'Senate', 'bills', 'lawsuits', 'court', 'Montana Supreme Court', 'abortion', 'gun control', 'voting rights', 'gun rights', 'politics'],
     // hacky as hell
-    image: "https://apps.montanafreepress.org/capitol-tracker-2021/images/mt-capitol-tracker.png"
+    image: "https://apps.montanafreepress.org/montana-legislature-lawsuit-tracker/images/lawsuit-tracker.png"
   },
-  // pathPrefix: `/staging-mtleg-2021`, // staging
-  pathPrefix: `/capitol-tracker-2021`, // for S3
+  // pathPrefix: `/draft-lawsuit-tracker-2021`, // staging
+  pathPrefix: `/montana-legislature-lawsuit-tracker`, // for S3
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
@@ -46,8 +46,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         trackingIds: [
-          "G-QCYEM18RKM", // TK, Google Analytics
-          "", // TK, Google adwords
+          "G-MHCJEWF70Y",
         ]
       }
     },
@@ -64,9 +63,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `2021 Montana Legislature`,
-        short_name: `MTLEG`,
-        description: `Explore the data behind the 2021 Montana Legislature`,
+        name: `Laws on trial – Montana Capitol lawsuit tracker`,
+        short_name: `Laws on trial`,
+        description: `Multiple legal challenges have been filed against measures passed by the 2021 Montana Legislature. Here’s where each case stands.`,
         start_url: `/`,
         icon: `static/mtfp-icon.png`,
         background_color: `#eae3da`,

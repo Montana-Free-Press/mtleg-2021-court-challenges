@@ -1,6 +1,7 @@
 .ipynb
 NOTES.md
 build-archive*
+*.ai
 
 # Gatsby builds
 public

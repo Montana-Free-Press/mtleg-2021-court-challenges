@@ -66,6 +66,7 @@ h3 {
 h4 {
     margin-bottom: 0.5em;
     color: var(--tan5);
+    font-weight: normal;
 }
 @media screen and (max-width: 468px){
     h1 {

@@ -12,7 +12,9 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "storybook": "cp -r ./public/page-data/sq/d ./public/static && NODE_ENV=test start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy": "gatsby build --prefix-paths && aws s3 sync public s3://apps.montanafreepress.org/draft-lawsuit-tracker-2021 --delete",
+    "decache": "aws cloudfront create-invalidation --distribution-id E3LVPS3XLJHLL5 --paths \"/draft-lawsuit-tracker-2021/*\""
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^11.0.0",
