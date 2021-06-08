@@ -1,8 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { css } from '@emotion/react'
-import { Link } from 'gatsby'
-
+// import { Link } from 'gatsby'
 // import Nav from './Nav'
 
 import Footer from './Footer'
@@ -72,16 +71,16 @@ const updateCss = css`
   margin-bottom: 0.5em;
   text-align: right;
 `
-const navCss = css`
-  position: sticky;
-  top: 0px;
-  background-color: white;
-  margin: -10px;
-  padding: 10px;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  z-index: 1000;
-`
+// const navCss = css`
+//   position: sticky;
+//   top: 0px;
+//   background-color: white;
+//   margin: -10px;
+//   padding: 10px;
+//   margin-bottom: 0;
+//   padding-bottom: 0;
+//   z-index: 1000;
+// `
 
 const Layout = ({ children, updateTime, siteHed, siteSubhed }) => {
   return (

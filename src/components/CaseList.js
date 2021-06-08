@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { Link } from 'gatsby'
 import { css } from '@emotion/react'
 
 import { billUrl, dateFormat, dateFormatLong } from '../config/utils'
@@ -78,7 +77,7 @@ const CaseList = ({ cases, title, description }) => {
     const itemsByCourt = courts.map(court => {
         const items = cases
             .filter(d => d.court === court)
-            .map(d => <Case key={d.name} {...d} />)
+            .map((d, i) => <Case i={i} key={d.name} {...d} />)
         return <div key={court}>
             <h4>{court}</h4>
             {items}
@@ -138,7 +137,7 @@ const articleCss = css`
 
 `
 
-const Case = ({ name, status, number, description, bills, court, plaintiffs, defendants, judge, docket_url, filings, articles }) => {
+const Case = ({ i, name, status, number, description, bills, court, plaintiffs, defendants, judge, docket_url, filings, articles }) => {
     const [isExpanded, setIsExpanded] = useState(false)
 
     const billsInvolved = bills.map((identifier, i) => {
@@ -160,7 +159,7 @@ const Case = ({ name, status, number, description, bills, court, plaintiffs, def
         caseNumber = <span><a href={docket_url} target="_blank" rel="noopener noreferrer">{number}</a></span>
     }
 
-    const filingList = filings.map(f => <Filing key={`${number}-${f.pdfName}`} caseNumber={number} {...f} />)
+    const filingList = filings.map((f, i) => <Filing key={`${number}-${i}`} caseNumber={number} {...f} />)
     const filingsPlural = filings.length === 1 ? '' : 's'
     const lastFiling = filings.sort((a, b) => new Date(a.date) - new Date(b.date)).slice(-1)[0]
     const lastFilingDate = lastFiling && lastFiling.date
@@ -174,7 +173,10 @@ const Case = ({ name, status, number, description, bills, court, plaintiffs, def
     const legalFilingCountLine = <span>— <strong>{filings.length}</strong> major legal filing{filingsPlural}{filings.length > 0 ? `, last on ${dateFormatLong(new Date(lastFilingDate))}` : ''}.</span>
 
     return <div css={caseContainerCss}>
-        <div css={caseHeaderCss} onClick={() => setIsExpanded(!isExpanded)}>
+        <div css={caseHeaderCss} role="button" tabIndex={0}
+            onClick={() => setIsExpanded(!isExpanded)}
+            onKeyDown={(e) => (e.key === 'Enter') ? setIsExpanded(!isExpanded) : null} // toggle on spacebar press
+        >
             <div css={caseIconCss}>{isExpanded ? '–' : '+'}</div>
             <div css={caseHeaderContent}>
                 <div css={caseNameLine}><strong>{name}</strong> ({caseNumber})</div>
@@ -222,7 +224,7 @@ const Case = ({ name, status, number, description, bills, court, plaintiffs, def
 
 
 const Filing = ({ caseNumber, name, date, filedBy, description, pdfName }) => {
-    const filingName = pdfName ?
+    const filingName = (pdfName !== '') ?
         <a href={`filings/${caseNumber}/${pdfName}`}>{name}</a>
         : <span>{name}</span>
 
